@@ -1,7 +1,6 @@
 import random
-from typing import Optional
 import arcade
-from arcade import Texture
+
 
 class Fruit(arcade.Sprite):
     def __init__(self, game):
@@ -13,17 +12,38 @@ class Fruit(arcade.Sprite):
         self.change_x = 0
         self.change_y = 0
 
+
 class Apple(Fruit):
     def __init__(self, game):
-        super().__init__("apple.png")
-        self.value = 1
+        super().__init__(game)
+        self.pic = arcade.load_texture("apple.png")
+        self.plus = 1
+
+    def draw(self):
+        arcade.draw_lrwh_rectangle_textured(
+            self.center_x, self.center_y, self.width, self.height, self.pic
+        )
+
 
 class Pear(Fruit):
     def __init__(self, game):
-        super().__init__("pear.png")
-        self.value = 2
+        super().__init__(game)
+        self.pic = arcade.load_texture("pear.png")
+        self.plus = 2
+
+    def draw(self):
+        arcade.draw_lrwh_rectangle_textured(
+            self.center_x, self.center_y, self.width, self.height, self.pic
+        )
+
 
 class Poop(Fruit):
     def __init__(self, game):
-        super().__init__("poop.png")
-        self.value = -1
+        super().__init__(game)
+        self.pic = arcade.load_texture("poop.png")
+        self.plus = -1
+
+    def draw(self):
+        arcade.draw_lrwh_rectangle_textured(
+            self.center_x, self.center_y, self.width, self.height, self.pic
+        )
