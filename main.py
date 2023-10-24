@@ -18,8 +18,7 @@ class Game(arcade.Window):
         self.poop = Poop(self)
         self.pear = Pear(self)
         self.snake = Snake(self)
-        # self.black_page = arcade.load_texture("black.png")
-        self.gameover = False
+        self.game_over = False
         self.state = 1
 
     def del_all(self):
@@ -42,7 +41,7 @@ class Game(arcade.Window):
             str("Score: " + str(self.snake.score)),
             self.width / 2,
             15,
-            arcade.color.WHITE,
+            arcade.color.BLACK,
             18,
         )
 
@@ -72,6 +71,11 @@ class Game(arcade.Window):
 
     def on_update(self, delta_time: float):
         self.snake.move()
+
+        for count, part in enumerate(self.snake.body):
+            for i in range(count + 1, len(self.snake.body)):
+                if part['x'] == self.snake.body[i]['x'] and part['y'] == self.snake.body[i]['y']:
+                    self.state = 0        
 
         if arcade.check_for_collision(self.snake, self.food):
             self.snake.score += 1
